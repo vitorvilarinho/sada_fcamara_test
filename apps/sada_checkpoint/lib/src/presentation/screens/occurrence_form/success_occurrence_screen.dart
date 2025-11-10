@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:sada_checkpoint/src/presentation/screens/occurrence_form/store/occurrence_store.dart';
@@ -69,11 +68,13 @@ class SuccessOccurrenceScreen extends StatelessWidget {
                             'Responsável:',
                             store.responsavelNameController.text,
                           ),
-                          if (store.createdAt != null)
+                          if (store.createdAt != null) ...[
+                            const SizedBox(height: 8),
                             _buildDetailRow(
                               'Data e hora:',
                               '${DateFormat('dd/MM/yyyy').format(store.createdAt!)} as ${DateFormat('HH:mm').format(store.createdAt!)}',
                             ),
+                          ],
                           const SizedBox(height: 8),
                           _buildDetailRow(
                             'Veículo:',
@@ -84,12 +85,7 @@ class SuccessOccurrenceScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    SadaButton(
-                      label: 'Ok',
-                      onPressed: () {
-                        Modular.to.popAndPushNamed('/');
-                      },
-                    ),
+                    SadaButton(label: 'Ok', onPressed: store.close),
                   ],
                 ),
               ),

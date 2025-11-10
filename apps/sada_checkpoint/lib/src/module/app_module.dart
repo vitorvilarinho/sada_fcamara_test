@@ -51,8 +51,8 @@ class AppModule extends Module {
     i.add<CameraStore>(() => CameraStore());
     i.addSingleton<DatabaseService>(() => DatabaseService.instance);
     i.addSingleton<HttpService>(() => HttpService.instance);
-    i.add(
-      () => OccurrenceStore(
+    i.addInstance(
+      OccurrenceStore(
         submitOccurrenceUseCase: SubmitOccurrenceUseCase(
           insertOccurenceInDatabaseRepository:
               InsertOccurenceInDatabaseRepositoryImpl(

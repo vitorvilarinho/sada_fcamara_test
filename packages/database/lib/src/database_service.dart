@@ -11,6 +11,7 @@ abstract class DatabaseService {
     required String responsibleName,
     required Uint8List signature,
     required List<Uint8List> images,
+    required DateTime createdAt,
   });
 
   Future<List<Map<String, dynamic>>> getUnsyncedOccurrences();

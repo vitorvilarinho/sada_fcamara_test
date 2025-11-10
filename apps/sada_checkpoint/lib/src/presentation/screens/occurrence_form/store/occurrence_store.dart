@@ -105,4 +105,15 @@ abstract class _OccurrenceStoreBase with Store {
 
     Modular.to.pushNamed('/occurrence/success');
   }
+
+  void close() {
+    licensePlateController.clear();
+    responsavelNameController.clear();
+    signatureController.clear();
+    signatureImage = null;
+    photos = ObservableList<File>();
+    createdAt = null;
+
+    Modular.to.popAndPushNamed('/');
+  }
 }

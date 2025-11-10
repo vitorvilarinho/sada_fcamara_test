@@ -33,7 +33,8 @@ class DatabaseServiceImpl implements DatabaseService {
             license_plate TEXT,
             responsible_name TEXT,
             signature BLOB,
-            sync INTEGER NOT NULL DEFAULT 0
+            sync INTEGER NOT NULL DEFAULT 0,
+            create_at TEXT NOT NULL
           )
         ''');
 
@@ -55,6 +56,7 @@ class DatabaseServiceImpl implements DatabaseService {
     required String responsibleName,
     required Uint8List signature,
     required List<Uint8List> images,
+    required DateTime createdAt,
   }) async {
     final database = await db;
     int? occurrenceId;
@@ -65,6 +67,7 @@ class DatabaseServiceImpl implements DatabaseService {
         'responsible_name': responsibleName,
         'signature': signature,
         'sync': 0,
+        'create_at': createdAt.toIso8601String(),
       });
 
       for (final img in images) {
@@ -75,7 +78,6 @@ class DatabaseServiceImpl implements DatabaseService {
       }
     });
 
-    await database.close();
     return occurrenceId;
   }
 
@@ -87,7 +89,7 @@ class DatabaseServiceImpl implements DatabaseService {
       where: 'sync = ?',
       whereArgs: [0],
     );
-    await database.close();
+
     return occurrences;
   }
 
@@ -100,7 +102,5 @@ class DatabaseServiceImpl implements DatabaseService {
       where: 'id = ?',
       whereArgs: [id],
     );
-
-    // await database.close();
   }
 }

@@ -25,6 +25,7 @@ class InsertOccurenceInDatabaseRepositoryImpl
         responsibleName: occurence.responsibleName,
         signature: signature,
         images: _photosToBytesList(occurence.photos),
+        createdAt: occurence.createdAt,
       );
       return occurrenceId;
     } catch (e) {}
